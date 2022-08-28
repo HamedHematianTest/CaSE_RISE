@@ -293,6 +293,8 @@ class RLTrainer(MLDTrainer):
 
             loss_arr, loss = self.train_step(self.dataset, self.collate_fn, max_count=fold_train_batches * self.batch_size,
                                              verbose=False, fold=t)
+            print('loss')
+            print(loss)
             epoch_loss.extend(loss_arr)
             if t > begin_sample_fold:
                 if self.sampling_strategy[:4] == 'RISE':
