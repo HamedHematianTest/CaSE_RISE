@@ -47,6 +47,7 @@ def run_bert_train(args):
     train_size = len(train_dataset.samples['origin'])
     print('train_size', train_size)
     post_fix = f'{config.sampling_strategy}-{config.reward_assign}-{seed}'
+    print('get trainer')
     trainer = RLTrainer(model=model, batch_size=batch_size, accumulation_steps=accumulation_steps,
                         model_name=model_name, ema_rate=0.995, max_epoch=config.max_epoch * 2,
                         initial_lr=config.initial_lr, tune_lr=config.tune_lr, tune_epoch=config.tune_epoch,
@@ -55,6 +56,7 @@ def run_bert_train(args):
     print(f'sampling strategy is {config.sampling_strategy}, reward function is {config.reward_assign}')
     trainer.set_save_path(model_name=model_name + f'-RL-{post_fix}')
     print('loaded model')
+    print('right before training')
     trainer.train_rl()
 
 
@@ -142,13 +144,13 @@ if __name__ == '__main__':
         run_bert_train(args)
         run_bert_generate(args, use_set='dev')
         run_bert_generate(args, use_set='test')
-        run_bert_generate(args, use_set='CAsT_test')
+#         run_bert_generate(args, use_set='CAsT_test')
     elif args.train == 3:
         run_bert_generate(args, use_set='CAsT_test')
     elif args.train == 0:
         run_bert_generate(args, use_set='dev')
         run_bert_generate(args, use_set='test')
-        run_bert_generate(args, use_set='CAsT_test')
+#         run_bert_generate(args, use_set='CAsT_test')
     else:
         raise ValueError
 
