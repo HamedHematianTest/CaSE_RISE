@@ -5,7 +5,7 @@ bert_special_tokens_dict = config.bert_special_tokens_dict
 
 def get_bert_tokenizer(tokenizer_path):
     from transformers import BertTokenizer
-    tokenizer = BertTokenizer.from_pretrained(tokenizer_path)
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     tokenizer.bos_token = tokenizer.cls_token
     tokenizer.eos_token = tokenizer.sep_token
     return tokenizer
